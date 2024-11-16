@@ -94,7 +94,16 @@ export default function Address({ flag }: any) {
               Back
             </button>
             <button
-              onClick={makePayment}
+              onClick={() =>
+                navigate("/checkout", {
+                  state: {
+                    products: JSON.stringify(products),
+                    priceSummary: JSON.stringify(priceSummary),
+                    selectedAddress: JSON.stringify(addressList[selectAdd])
+                  },
+                })
+              }
+              //onClick={makePayment}
               // onClick={() =>
               //   navigate("/orderplaced", {
               //     state: {

@@ -62,5 +62,26 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        // Hide the default password input icons (ms-reveal, ms-clear, etc.)
+        'input[type="password"]::-ms-reveal': {
+          display: 'none',
+        },
+        'input[type="password"]::-ms-clear': {
+          display: 'none',
+        },
+        'input[type="password"]::-webkit-credentials-auto-fill-button': {
+          display: 'none',
+        },
+        'input[type="password"]::-webkit-inner-spin-button': {
+          display: 'none',
+        },
+        'input[type="password"]::-webkit-clear-button': {
+          display: 'none',
+        },
+      })
+    }
+  ],
 };

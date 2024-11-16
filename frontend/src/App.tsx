@@ -6,6 +6,8 @@ const ShopProducts = React.lazy(
   () => import("./components/SearchProducts/ShopProducts")
 );
 const FavoritePage = React.lazy(() => import("./pages/Favorite/FavoritePage"));
+const Login = React.lazy(() => import("./pages/Login/LoginPage"));
+const SignUpPage = React.lazy(()=> import("./pages/SignUp/SignUpPage"))
 import Layout from "./layout/Layout";
 import { Suspense } from "react";
 import ProductLanding from "./components/SearchProducts/ProductLanding";
@@ -26,6 +28,10 @@ import { Terms } from "./components/Account/pages/Terms/Terms";
 import { Help } from "./components/Account/pages/Help/Help";
 import Address from "./pages/Address/Address";
 import PayCheckout from "./pages/PaymentPage/PayCheckout";
+import CheckOut from "./components/CheckOut/page/CheckOut";
+import LoginOtp from "./components/Login/LoginOtp";
+
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -38,6 +44,32 @@ export default function App() {
                 <HomePage />
               </Suspense>
             </Layout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+              <Suspense fallback={<Loading />}>
+                <Login />
+              </Suspense>
+          }
+        />
+                <Route
+          path="/otp"
+          element={
+              <Suspense fallback={<Loading />}>
+                <LoginOtp />
+              </Suspense>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+
+              <Suspense fallback={<Loading />}>
+                <SignUpPage />
+              </Suspense>
+
           }
         />
         <Route
@@ -106,6 +138,16 @@ export default function App() {
             <Layout>
               <Suspense fallback={<Loading />}>
                 <FavoritePage />
+              </Suspense>
+            </Layout>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <Layout>
+              <Suspense fallback={<Loading />}>
+                <CheckOut />
               </Suspense>
             </Layout>
           }
