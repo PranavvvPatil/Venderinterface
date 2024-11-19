@@ -7,14 +7,18 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import AppleSignin from "react-apple-signin-auth";
 import axios from "axios";
 
-const Signup = () => {
+interface SignupProps {
+  showPopup: (message: string) => void;
+}
+
+const Signup = ({ showPopup }: SignupProps) => {
 
   const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = useState(false); 
   const [formData, setFormData] = useState({ fullname: "", username:"", email: "", password: "", agreedToTerms: false });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
         ...prevData,
@@ -25,7 +29,7 @@ const Signup = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     if (!formData.agreedToTerms) {
-        alert("Please agree to the Terms & Conditions before logging in.");
+        showPopup("Please agree to the Terms & Conditions before signing up.");
         return;
     }
 
@@ -38,16 +42,13 @@ const Signup = () => {
      },
      { withCredentials: true }
      );
- 
-     alert(response.data.message);
+
      console.log("Token:", response.data.token);
  
      setFormData({ fullname: "", username:"" , email: "", password: "", agreedToTerms: false });
-
      navigate("/");
-   } catch (error) {
-     console.error(error);
-     alert(error.response?.data?.error || "Login failed");
+   } catch (error: any) {
+     showPopup(error.response?.data?.error || "Sign-up failed.");
    }
 };
 
@@ -79,7 +80,7 @@ const handleAppleFailure = (error) => {
 
 
   return (
-    <div className="w-[100vw] h-[100vh] flex items-center justify-center bg-cover bg-center bg-[url('https://s3-alpha-sig.figma.com/img/b69f/b896/6a79ec5f2a9fcc0c6da7f2c6abce9fbc?Expires=1732492800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UTm85kUC5NtMghOMo~DyOa0DtpH7JT0HhKYMD2mMuEkya-Ua4~Cm50obbQ3h4mqRgSlN1eD1SgzEVrMZPpHEGyIIR9vKw~~FVCNtgEO0DtWuNyqQ1pmF2kpOKpy1Mf9Tk18fts1Ic40C2eX-SSQye-EheNohIhP2Hi25TDRfP87pzvozITkYmfUbxfCpQ41GGLYbmNo3zQ62ZX3e7K2mb0~cP65eNf0gLHzkJ4ZXfJ7bon9yADnpROuHpdGeGyqaxq1vrxU~jw9eZx8VSZmIQwNx0P8juoDeuHHH1BCZrydM8ckpR3dWLnhTZSQP8ZXwL1EMYm~q8R-a8iqyUoOsCA__')]"
+    <div className="w-[100vw] h-[100vh] flex items-center justify-center"
      >
 
     <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full ">

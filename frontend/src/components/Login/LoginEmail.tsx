@@ -8,8 +8,12 @@ import AppleSignin from "react-apple-signin-auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+interface LoginProps {
+   showPopup: (message: string) => void;
+ }
+ 
 
-const LoginEmail = ({onLoginWithNumber}) => {
+const LoginEmail = ({ showPopup}:LoginProps ,{onLoginWithNumber}) => {
 ;
 
     const [formData, setFormData] = useState({ email: "", password: "", agreedToTerms: false });
@@ -31,7 +35,7 @@ const LoginEmail = ({onLoginWithNumber}) => {
 
     const handleLogin = async () => {
         if (!formData.agreedToTerms) {
-            alert("Please agree to the Terms & Conditions before logging in.");
+            showPopup("Please agree to the Terms & Conditions before signing up.");
             return;
         }
 
@@ -43,15 +47,12 @@ const LoginEmail = ({onLoginWithNumber}) => {
          { withCredentials: true }
          );
      
-         alert(response.data.message);
          console.log("Token:", response.data.token);
      
          setFormData({ email: "", password: "", agreedToTerms: false });
-
          navigate("/");
        } catch (error) {
-         console.error(error);
-         alert(error.response?.data?.error || "Login failed");
+         showPopup(error.response?.data?.error || "Login failed.");
        }
     };
 

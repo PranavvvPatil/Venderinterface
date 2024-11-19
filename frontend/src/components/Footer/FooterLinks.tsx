@@ -6,15 +6,15 @@ type propsType = {
 
 export default function FooterLinks({ data }: propsType) {
   return (
-    <div className="flex flex-col gap-y-4 max-[550px]:text-center min-[550px]:w-fit text-nowrap ">
-      <h2 className="font-Poppins font-bold text-[#2C2C2C] text-xl">
+    <div className="flex flex-col gap-y-3  max-[550px]:text-center min-[550px]:w-fit text-nowrap ">
+      <h2 className="font-Poppins font-semibold text-[#0A0A0A]-600 text-xl">
         {data.title}
       </h2>
       {data.items.map((item) => (
         <a
           href={item.link}
           key={item.id}
-          className="text-[#5E5E5E] font-medium font-Poppins text-base cursor-pointer no-underline"
+          className="text-gray-700 font-poppins text-base font-normal leading- tracking-tight"
         >
           {item.title}
         </a>

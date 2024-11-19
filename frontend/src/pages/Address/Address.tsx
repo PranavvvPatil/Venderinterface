@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import AddressCard from "../../components/Address/AddressCard";
 import AddressForm from "../../components/Address/AddressForm";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useLocation, useNavigate } from "react-router-dom";
 import PlusIcon from "../../svgIcons/PlusIcon";
 import { addressList as addressArray } from "../../constants/addressList";
@@ -26,6 +27,7 @@ export default function Address({ flag }: any) {
     setEdit(true);
     setEditData(addressList[index]);
   };
+  const containerRef = useRef<HTMLDivElement>(null);
   const handleAdd = () => {
     setEdit(false);
   };
@@ -49,30 +51,53 @@ export default function Address({ flag }: any) {
     window.location.href = resBody.url;
   };
 
+  const scrollContainer = (direction: "left" | "right") => {
+    if (containerRef.current) {
+      const scrollAmount = direction === "left" ? -200 : 200;
+      containerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div>
       <div>
         <div className="flex flex-col max-w-[50rem] gap-y-4 w-full border-none">
-          <div className="flex gap-x-3 overflow-scroll no-scrollbar">
-            {addressList?.map((address, index) => (
-              <AddressCard
-                key={address.id}
-                address={address}
-                setSelectAdd={setSelectAdd}
-                flag={index == selectAdd ? true : false}
-                index={index}
-                handleEdit={handleEdit}
-              />
-            ))}
-            <div className="flex justify-center items-center">
-              <button
-                className="flex justify-center items-center"
-                onClick={handleAdd}
-              >
-                <PlusIcon size={"48"} />
-              </button>
+
+          <div className="relative flex items-center">
+            <button
+              onClick={() => scrollContainer("left")}
+              className="absolute left-0 z-10 bg-gray-200 rounded-full p-2 shadow-md hover:bg-gray-300"
+            >
+              <ChevronLeftIcon className="text-gray-700" />
+            </button>
+          
+            <div
+              ref={containerRef}
+              className="flex gap-x-3 overflow-x-auto no-scrollbar px-8 w-full"
+            >
+              {addressList?.map((address, index) => (
+                <AddressCard
+                  key={address.id}
+                  address={address}
+                  setSelectAdd={setSelectAdd}
+                  flag={index === selectAdd}
+                  index={index}
+                  handleEdit={handleEdit}
+                />
+              ))}
             </div>
+          
+            <button
+              onClick={() => scrollContainer("right")}
+              className="absolute right-0 z-10 bg-gray-200 rounded-full p-2 shadow-md hover:bg-gray-300"
+            >
+              <ChevronRightIcon className="text-gray-700" />
+            </button>
           </div>
+
           <div>
             <AddressForm
               setAddressList={setAddressList}

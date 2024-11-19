@@ -12,31 +12,33 @@ export type footerDetailsProps = {
 export const footerDetails: footerDetailsProps[] = [
   {
     id: 1,
-    title: "Products",
+    title: "About",
     items: [
-      { id: 1, title: "Categories", link: "" },
-      { id: 2, title: "Top Products", link: "" },
+      { id: 1, title: "Blog", link: "../blog" },
+      { id: 2, title: "Announcements", link: "" },
+      { id: 3, title: "Reviews", link: "" },
+
+
     ],
   },
   {
     id: 2,
     title: "Support",
     items: [
-      { id: 1, title: "Support request", link: "" },
-      { id: 2, title: "Contact", link: "" },
+      { id: 1, title: "Help + FAQ’S", link: "../account/help" },
+      { id: 2, title: "Track your order", link: "../account/orders" },
+      { id: 3, title: "Shipping", link: "" },
+      { id: 4, title: "Returns", link: "" },
+      { id: 5, title: "Contact support", link: "./contact-us" },
     ],
   },
   {
     id: 3,
-    title: "About",
+    title: "Get In Touch",
     items: [
-      { id: 1, title: "Blogs", link: "" },
-      { id: 2, title: "FAQ's", link: "" },
+      { id: 1, title: "+91 7876209548 ", link: "" },
+      { id: 2, title: "shopyournursary@gmail.com", link: "" },
     ],
   },
-  {
-    id: 4,
-    title: "Privacy policy",
-    items: [{ id: 1, title: "Support request", link: "Terms & Conditions" }],
-  },
+
 ];
