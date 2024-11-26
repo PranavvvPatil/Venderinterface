@@ -30,12 +30,15 @@ export default function Empty({ tag }: emptyPropsType) {
           </div>
         </div>
         <div className="flex flex-col items-center gap-y-5 sm:flex-row w-full justify-evenly mt-5">
-          <button className="bg-[#7AA262] max-w-[18rem] w-full py-3 rounded-full text-[#F3F3F3] font-medium font-Poppins text-center">
+          <button 
+            onClick={() => navigate("/shop")}
+            className="bg-[#7AA262] max-w-[18rem] w-full py-3 rounded-full text-[#F3F3F3] font-medium font-Poppins text-center"
+          >
             Continue Shopping
           </button>
           <button
             onClick={() =>
-              tag == "empty" ? navigate("/cart") : navigate("/favorite")
+              tag == "empty" ? navigate("/favorite") : navigate("/cart")
             }
             className="bg-[#E8E8E8]  max-w-[18rem] w-full py-3 rounded-full  font-normal font-Poppins text-center"
           >

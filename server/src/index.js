@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 //api route navigation to handle all api requests
 app.use("/api", apiRouter);
 app.use("/api/auth", authRoutes);
+app.use("/api/cart",)
 app.get("/check", (req, res) => {
  res.send("Server is Healthy");
 });

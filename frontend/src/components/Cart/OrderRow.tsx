@@ -18,8 +18,8 @@ export default function OrderRow({
         {title}
       </div>
       <div className={`${priceStyles}`}>
-        {price == 0 && `$${price}`}
-        {price ? `$${price}` : qty}
+        {price == 0 && `${price}`}
+        {price ? `${price}` : qty}
       </div>
     </div>
   );
